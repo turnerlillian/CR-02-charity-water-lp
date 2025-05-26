@@ -65,6 +65,11 @@ body {
   border-radius: 6px;
 }
 
+.cta-button:hover {
+  background-color: #2E9DF7;
+  color: #ffffff
+}
+
 .image-section {
   flex: 0 0 425px;
   text-align: center;
@@ -101,11 +106,11 @@ body {
 
 .site-header {
   background-color: #fff7e1;
-  padding: 50px 0 50px 120px;
+  padding: 35px 0 35px 120px;
 }
 
 .site-header .logo {
-  width: 300px;
+  width: 200px;
   height: auto;
 }
 
