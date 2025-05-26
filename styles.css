@@ -43,14 +43,14 @@ body {
 }
 
 .text-section h1 {
-  font-size: 42px; /* was 2.2em */
+  font-size: 42px;
   color: #FFC907;
   line-height: 1.2;
   margin-bottom: 0px;
 }
 
 .text-section p {
-  font-size: 25px; /* was 1.1em */
+  font-size: 25px;
   margin-bottom: 35px;
   line-height: 1.2;
 }
@@ -109,23 +109,19 @@ body {
   height: auto;
 }
 
-/* Decorative triangle in the bottom right corner */
-/* 
-   This creates a right-pointing triangle using borders.
-   The colored border is on the right, and the transparent border is on top.
-*/
+
 .triangle-bg {
   width: 0;
   height: 0;
-  border-top: 450px solid transparent;   /* Transparent top border */
-  border-right: 700px solid #fff7e1;     /* Colored right border (triangle color) */
-  position: fixed;                       /* Keeps the triangle in the same place even when scrolling */
-  bottom: 0;                             /* Positions at the bottom */
-  right: 0;                              /* Positions at the right */
-  z-index: 0;                            /* Makes sure it's behind the content */
+  border-top: 450px solid transparent;   
+  border-right: 700px solid #fff7e1;     
+  position: fixed;                       
+  bottom: 0;                            
+  right: 0;                             
+  z-index: 0;                           
 }
 
-/* Make sure the main content is above the triangle */
+
 body > *:not(.triangle-bg) {
   position: relative;
   z-index: 1;
