@@ -17,3 +17,116 @@ Fonts:
 - Avenir
 
 */
+body {
+  margin: 0;
+  font-family: Proxima Nova, Avenir, sans-serif;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-section {
+  flex: 1 1 400px;
+  padding-right: 80px;
+  padding-left: 0px;
+  text-align: left;
+  margin-top: -100px;
+}
+
+.text-section h1 {
+  font-size: 42px; /* was 2.2em */
+  color: #FFC907;
+  line-height: 1.2;
+  margin-bottom: 0px;
+}
+
+.text-section p {
+  font-size: 25px; /* was 1.1em */
+  margin-bottom: 35px;
+  line-height: 1.2;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 14px 24px;
+  background-color: #003366;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.image-section {
+  flex: 0 0 425px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.image-section img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+
+  border-top-left-radius: 250px;
+  border-top-right-radius: 250px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  border: 10px solid #ffc907;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .text-section {
+    padding-right: 0;
+  }
+
+  .image-section {
+    margin-top: 20px;
+  }
+}
+
+.site-header {
+  background-color: #fff7e1;
+  padding: 50px 0 50px 120px;
+}
+
+.site-header .logo {
+  width: 300px;
+  height: auto;
+}
+
+/* Decorative triangle in the bottom right corner */
+/* 
+   This creates a right-pointing triangle using borders.
+   The colored border is on the right, and the transparent border is on top.
+*/
+.triangle-bg {
+  width: 0;
+  height: 0;
+  border-top: 450px solid transparent;   /* Transparent top border */
+  border-right: 700px solid #fff7e1;     /* Colored right border (triangle color) */
+  position: fixed;                       /* Keeps the triangle in the same place even when scrolling */
+  bottom: 0;                             /* Positions at the bottom */
+  right: 0;                              /* Positions at the right */
+  z-index: 0;                            /* Makes sure it's behind the content */
+}
+
+/* Make sure the main content is above the triangle */
+body > *:not(.triangle-bg) {
+  position: relative;
+  z-index: 1;
+}
