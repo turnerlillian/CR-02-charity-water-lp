@@ -119,8 +119,8 @@ body {
 .triangle-bg {
   width: 0;
   height: 0;
-  border-top: 450px solid transparent;   
-  border-right: 700px solid #fff7e1;     
+  border-top: 225px solid transparent;   
+  border-right: 800px solid #fff7e1;     
   position: fixed;                       
   bottom: 0;                            
   right: 0;                             
