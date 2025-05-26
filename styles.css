@@ -45,14 +45,14 @@ body {
 .text-section h1 {
   font-size: 42px;
   color: #FFC907;
-  line-height: 1.2;
+  line-height: 1.35;
   margin-bottom: 0px;
 }
 
 .text-section p {
   font-size: 25px;
   margin-bottom: 35px;
-  line-height: 1.2;
+  line-height: 1.5;
 }
 
 .cta-button {
@@ -91,16 +91,17 @@ body {
 
 @media (max-width: 1000px) {
   .container {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: column;   
+    text-align: center;       
   }
 
   .text-section {
-    padding-right: 0;
+    padding-right: 0;        
+    margin-top: 0;           
   }
 
   .image-section {
-    margin-top: 20px;
+    margin-top: 20px;        
   }
 }
 
