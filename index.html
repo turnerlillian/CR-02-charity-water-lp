@@ -7,12 +7,36 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
- <a href="https://www.charitywater.org" target="_blank">
+  <header class="site-header banner">
+    <a href="https://www.charitywater.org" target="_blank">
       <img src="img/cw_logo-2.png" alt="Charity Water Logo" class="logo">
     </a>
+    <nav class="nav-tabs nav-main">
+      <a href="https://www.charitywater.org/take-action" class="nav-link" target="_blank">Take Action</a>
+      <a href="https://www.charitywater.org/about" class="nav-link" target="_blank">About Us</a>
+      <a href="https://www.charitywater.org/global-water-crisis" class="nav-link" target="_blank">Why Water?</a>
+    </nav>
+    <!-- Sign In and Give tabs on the far right -->
+    <nav class="nav-tabs nav-right">
+      <a href="https://www.charitywater.org/account/login" class="nav-link sign-in-tab" target="_blank">Sign In</a>
+      <a href="https://www.charitywater.org/donate" class="nav-link give-tab" target="_blank">
+        Give
+        <!-- Cartoon water droplet SVG icon on the right -->
+        <svg class="droplet" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2C10 2 3 10.5 3 15.5C3 19.09 6.13 22 10 22C13.87 22 17 19.09 17 15.5C17 10.5 10 2 10 2Z" fill="#2E9DF7" stroke="#159A48" stroke-width="1.5"/>
+          <ellipse cx="10" cy="17" rx="3" ry="2" fill="#fff" fill-opacity="0.5"/>
+        </svg>
+      </a>
+    </nav>
   </header>
   <div class="container">
+    <!-- Switch the order: image-section first, then text-section -->
+    <div class="image-section">
+      <!-- Make the image clickable by wrapping it in a link -->
+      <a href="https://www.charitywater.org/our-work" target="_blank">
+        <img src="img/charitywatergirl.jpg" alt="Smiling girl at water pump" />
+      </a>
+    </div>
     <div class="text-section">
       <h1>Lead the Clean Water Movement on Your Campus!</h1>
       <p>
@@ -21,13 +45,34 @@
         you can track.
       </p>
       <a href="https://www.charitywater.org/fundraise" class="cta-button" target="_blank">
-  Start Organizing Now!
-</a>
-    </div>
-    <div class="image-section">
-      <img src="img/charitywatergirl.jpg" alt="Smiling girl at water pump" />
+        START ORGANIZING NOW!
+      </a>
     </div>
   </div>
   <div class="triangle-bg"></div>
+  <script>
+    // Show/hide dropdown menu for Take Action
+    document.addEventListener('DOMContentLoaded', function() {
+      var link = document.getElementById('take-action-link');
+      var menu = document.getElementById('take-action-menu');
+      // Show menu on hover or focus
+      link.addEventListener('mouseenter', function() {
+        menu.style.display = 'block';
+      });
+      link.addEventListener('focus', function() {
+        menu.style.display = 'block';
+      });
+      // Hide menu when mouse leaves link or menu
+      link.addEventListener('mouseleave', function() {
+        setTimeout(function() { menu.style.display = 'none'; }, 100);
+      });
+      menu.addEventListener('mouseenter', function() {
+        menu.style.display = 'block';
+      });
+      menu.addEventListener('mouseleave', function() {
+        menu.style.display = 'none';
+      });
+    });
+  </script>
 </body>
 </html>

@@ -30,27 +30,37 @@ body {
   padding: 30px 30px;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  align-items: center;         /* Vertically center items */
+  justify-content: center;     /* Horizontally center all content */
+  text-align: center;          /* Center text inside container */
 }
 
+/* Make both sections take up equal space and center their content */
+.image-section, .text-section {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;         /* Center content horizontally */
+}
+
+/* Remove extra paddings so content is truly centered */
 .text-section {
-  flex: 1 1 400px;
-  padding-right: 80px;
-  padding-left: 0px;
-  text-align: left;
-  margin-top: -100px;
+  padding-left: 165px;
+  padding-right: 0;
+  margin-top: -250px;
+  text-align: right;          /* Right-justify the text */
+  align-items: flex-end;      /* Align items (including button) to the right */
 }
 
 .text-section h1 {
-  font-size: 42px;
+  font-size: 40px;
   color: #FFC907;
   line-height: 1.35;
   margin-bottom: 0px;
 }
 
 .text-section p {
-  font-size: 25px;
+  font-size: 16px;
   margin-bottom: 35px;
   line-height: 1.5;
 }
@@ -61,23 +71,34 @@ body {
   background-color: #003366;
   color: white;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600; /* Make the CTA button text semi-bold */
   border-radius: 6px;
+  letter-spacing: 1.2px; /* Slightly increase kerning for CTA button text */
 }
 
+/* Add a smooth transition to elements that will have hover effects */
+.cta-button,
+.image-section img,
+.site-header .logo {
+  transition: all 0.3s;
+}
+
+/* Button hover effect: change background and add a slight scale */
 .cta-button:hover {
-  background-color: #2E9DF7;
-  color: #ffffff
+  background-color: #8BD1CB;
+  color: #ffffff;
+  transform: scale(1.05); /* Slightly enlarge the button */
 }
 
 .image-section {
-  flex: 0 0 425px;
+  flex: 0 0 500px;           /* Make the image section a bit wider */
   text-align: center;
   margin-top: 30px;
 }
 
 .image-section img {
   max-width: 100%;
+  width: 480px;               /* Set a larger width for the image */
   display: block;
   margin: 0 auto;
 
@@ -87,6 +108,12 @@ body {
   border-bottom-right-radius: 0;
 
   border: 10px solid #ffc907;
+}
+
+/* Image hover effect: add a shadow and slightly enlarge */
+.image-section img:hover {
+  box-shadow: 0 8px 24px rgba(46, 157, 247, 0.2);
+  transform: scale(1.03); /* Slightly enlarge the image */
 }
 
 @media (max-width: 1000px) {
@@ -107,19 +134,143 @@ body {
 
 .site-header {
   background-color: #fff7e1;
-  padding: 35px 0 35px 120px;
+  padding: 0 0 0 120px;
+  height: 80px; /* Slightly larger header */
+  display: flex;
+  align-items: center;
+  z-index: 9000;
+  position: relative;
+  /* Remove any overflow property if present */
 }
 
-.site-header .logo {
-  width: 200px;
-  height: auto;
+/* Style for the header when using the .banner class */
+.banner {
+  background-color: #fff7e1;
+  padding: 0 0 0 120px;
+  height: 80px; /* Slightly larger header */
+  display: flex;
+  align-items: center;
+  z-index: 9000;
+  position: relative;
+  /* Remove any overflow property if present */
 }
 
+/* Make sure all nav tabs are vertically centered */
+.nav-tabs {
+  display: flex;
+  gap: 20px;
+  align-items: center;          /* Vertically center nav links */
+  height: 100%;                 /* Make nav take full header height */
+}
+
+/* Logo hover effect: only scale, no shadow */
+.site-header .logo:hover {
+  transform: scale(1.07); /* Only enlarge the logo */
+}
+
+/* Navigation bar styles for main and right navs */
+.nav-tabs {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Main nav: tabs right after the logo */
+.nav-main {
+  margin-left: 30px;   /* Space between logo and main nav */
+  margin-right: 0;
+  flex: none;
+  justify-content: flex-start;
+}
+
+/* Right nav: tabs on the far right */
+.nav-right {
+  margin-left: auto;   /* Push right nav to the far right */
+  margin-right: 125px; /* Move SIGN IN and GIVE 100px to the left (was 80px) */
+  flex: none;
+  justify-content: flex-end;
+}
+
+/* Remove margin-left from sign-in-tab if present */
+.nav-tabs .sign-in-tab {
+  margin-left: 0;
+}
+
+/* Style for each navigation link */
+.nav-link {
+  color: #000000;              /* Black text */
+  background-color: #fff7e1;   /* Match header background */
+  text-decoration: none;       /* Remove underline */
+  font-size: 13px;
+  font-weight: 575;           /* Make the font semi-bold */
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: color 0.2s, transform 0.2s; /* Add transform for scaling */
+  border: none;
+  text-transform: uppercase;
+  position: relative;          /* Needed for the underline effect */
+  letter-spacing: 2px;         /* Slightly increase kerning (space between letters) */
+}
+
+/* Special hover effect for main nav tabs (no box, no scale, gray text, yellow underline) */
+.nav-link:hover {
+  background-color: #fff7e1;
+  color: #707070;
+  transform: scale(1.06);      /* Add scaling on hover */
+  border: none;
+}
+
+/* Add a straight yellow line under the text on hover using ::after */
+.nav-link:hover::after {
+  content: "";
+  display: block;
+  height: 3px;
+  background: #FFC907;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0px; /* Move the yellow line 3px below the text */
+  border-radius: 0;
+  width: 85%; /* Only as wide as the text content */
+  margin: 0 auto;
+  /* The underline will match the width of the nav tab text */
+}
+
+/* Special style for the GIVE nav tab */
+.nav-link.give-tab {
+  border: 2px solid #FFC907;    /* Yellow border */
+  background-color: #FFC907;    /* Fill with yellow */
+  color: #003366;               /* Dark blue text for contrast */
+  box-sizing: border-box;       /* Include border in size */
+  transition: color 0.2s, background 0.2s, border 0.2s, transform 0.2s;
+  display: flex;                /* Use flex to help vertical alignment */
+  align-items: center;          /* Vertically center text and droplet */
+  justify-content: center;      /* Horizontally center content */
+  height: 32px;                 /* Set a fixed height for better centering */
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Add a scaling hover effect to the GIVE nav tab */
+.nav-link.give-tab:hover {
+  transform: scale(1.06);       /* Slightly enlarge the GIVE tab */
+}
+
+/* Add a little space between the GIVE text and the droplet */
+.give-tab .droplet {
+  vertical-align: middle;    /* Align droplet with text */
+  margin-left: 4px;
+  margin-right: 0;
+  height: 18px;
+  width: 18px;
+  position: relative;        /* Needed to move the droplet */
+  top: -1.5px;                 /* Move the droplet up by 2 pixels */
+}
 
 .triangle-bg {
   width: 0;
   height: 0;
-  border-top: 225px solid transparent;   
+  border-top: 220px solid transparent;   
   border-right: 800px solid #fff7e1;     
   position: fixed;                       
   bottom: 0;                            
@@ -131,4 +282,11 @@ body {
 body > *:not(.triangle-bg) {
   position: relative;
   z-index: 1;
+}
+
+.site-header .logo {
+  width: 140px;              /* Make the logo smaller */
+  height: auto;
+  position: relative;
+  top: 1px;
 }
