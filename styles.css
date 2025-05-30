@@ -22,12 +22,13 @@ body {
   font-family: Proxima Nova, Avenir, sans-serif;
   background-color: #ffffff;
   color: #333;
+  position: relative; /* Needed for absolute children */
 }
 
 .container {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 30px 30px;
+  margin: -60px auto;
+  padding: -60px 30px 30px 30px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;         /* Vertically center items */
@@ -85,7 +86,7 @@ body {
 
 /* Button hover effect: change background and add a slight scale */
 .cta-button:hover {
-  background-color: #8BD1CB;
+  background-color: #55a1d7;
   color: #ffffff;
   transform: scale(1.05); /* Slightly enlarge the button */
 }
@@ -116,31 +117,95 @@ body {
   transform: scale(1.03); /* Slightly enlarge the image */
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 700px) {
+  /* Stack text-section above image-section */
   .container {
-    flex-direction: column;   
-    text-align: center;       
-  }
-
-  .text-section {
-    padding-right: 0;        
-    margin-top: 0;           
+    flex-direction: column-reverse; /* Text on top, image below */
+    text-align: center;
+    padding: 20px 8px;
+    margin-top: 0px; /* Move the body further down on mobile */
   }
 
   .image-section {
-    margin-top: 20px;        
+    flex: none;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .image-section img {
+    width: 90vw;                /* Image fills most of the screen width */
+    max-width: 350px;           /* Prevent image from being too large */
+    height: auto;
+  }
+
+  .text-section {
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 0;
+    align-items: center;        /* Center text and button */
+    text-align: center;
+  }
+
+  .text-section h1 {
+    font-size: 28px;            /* Smaller heading */
+  }
+
+  .text-section p {
+    font-size: 15px;            /* Smaller paragraph */
+  }
+
+  /* Hide nav-tabs by default on mobile */
+  .nav-tabs {
+    display: none; /* Hide menu */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background: #fff7e1;
+    position: static; /* Not absolute, so it pushes content down */
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0; /* No extra margin needed */
+  }
+
+  /* When menu is open, show it and push content down */
+  .nav-tabs.open {
+    display: flex; /* Show menu as a block, pushing content down */
   }
 }
 
-.site-header {
-  background-color: #fff7e1;
-  padding: 0 0 0 120px;
-  height: 80px; /* Slightly larger header */
-  display: flex;
-  align-items: center;
-  z-index: 9000;
-  position: relative;
-  /* Remove any overflow property if present */
+/* Mobile styles for navigation */
+@media (max-width: 700px) {
+  /* Make nav-main and nav-tabs normal block elements on mobile */
+  .nav-main,
+  .nav-tabs {
+    position: static;    /* Not absolute or fixed */
+    width: 100%;         /* Full width */
+    background: #fff7e1; /* Light background */
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    z-index: auto;       /* Use normal stacking */
+  }
+
+  .nav-main {
+    display: none;       /* Hide by default */
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav-main.open {
+    display: flex;       /* Show when hamburger is clicked */
+  }
+
+  .nav-tabs {
+    display: none;       /* Hide by default */
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav-tabs.open {
+    display: flex;       /* Show when hamburger is clicked */
+  }
 }
 
 /* Style for the header when using the .banner class */
@@ -153,6 +218,43 @@ body {
   z-index: 9000;
   position: relative;
   /* Remove any overflow property if present */
+}
+
+/* Desktop header: fixed at the top */
+.site-header,
+.nav-header-row {
+  display: flex;
+  align-items: center;
+  background-color: #fff7e1;
+  padding: 0 0 0 120px;
+  height: 80px;
+  position: fixed; /* Fixed on desktop */
+  z-index: 9000;
+}
+
+/* Make nav-main appear 200px to the right from the left edge of the page */
+.nav-main {
+  display: flex;
+  gap: 20px;
+  position: absolute;    /* Take out of normal flow and position absolutely */
+  top: -81px;                /* Align to the top of the page */
+  left: 275px;           /* Move 200px from the left edge */
+  height: 80px;          /* Match header height */
+  align-items: center;   /* Vertically center links */
+  background: transparent; /* No background */
+}
+
+/* Make nav-tabs (right links) appear on the far right */
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 125px;
+  gap: 20px;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 /* Make sure all nav tabs are vertically centered */
@@ -175,20 +277,38 @@ body {
   align-items: center;
 }
 
-/* Main nav: tabs right after the logo */
-.nav-main {
-  margin-left: 30px;   /* Space between logo and main nav */
+/* Desktop navigation layout */
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  margin-left: 0;
   margin-right: 0;
-  flex: none;
-  justify-content: flex-start;
+  gap: 0;
+  height: 100%;
+  width: 100%;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
 }
 
-/* Right nav: tabs on the far right */
+/* Main nav: right of logo */
+.nav-main {
+  display: flex;
+  gap: 20px; /* Space between main nav links */
+  margin-left: 30px; /* Space between logo and main nav */
+}
+
+/* Right nav: far right */
 .nav-right {
-  margin-left: auto;   /* Push right nav to the far right */
-  margin-right: 125px; /* Move SIGN IN and GIVE 100px to the left (was 80px) */
-  flex: none;
-  justify-content: flex-end;
+  display: flex;
+  gap: 20px; /* Space between right nav links */
+  position: absolute;      /* Take out of normal flow and position absolutely */
+  top: -160px;                  /* Align to the top of the page */
+  right: 125px;            /* 125px from the right edge */
+  height: 80px;            /* Match header height */
+  align-items: center;     /* Vertically center links */
+  background: transparent; /* No background */
 }
 
 /* Remove margin-left from sign-in-tab if present */
@@ -251,6 +371,7 @@ body {
   padding-bottom: 0;
 }
 
+/* Add a scaling hover effect to the GIVE nav tab */
 .nav-link.give-tab:hover {
   transform: scale(1.06);       /* Slightly enlarge the GIVE tab */
 }
@@ -288,4 +409,138 @@ body > *:not(.triangle-bg) {
   height: auto;
   position: relative;
   top: 1px;
+}
+
+/* Hide hamburger on desktop by default */
+.hamburger {
+  display: none; /* Hide hamburger on desktop */
+}
+
+/* Header layout: logo left, nav right, hamburger right of logo */
+.site-header {
+  display: flex;
+  align-items: center;
+  background-color: #fff7e1;
+  padding: 0 0 0 120px;
+  height: 80px;
+  position: relative;
+  z-index: 9000;
+}
+
+/* Place hamburger to the right of the logo */
+.hamburger {
+  margin-left: 16px;
+}
+
+/* Make nav-tabs fill the remaining space on desktop */
+.nav-tabs {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 125px;
+  height: 100%;
+}
+
+/* Hamburger menu lines (the three bars) */
+.hamburger span {
+  display: block;              /* Make each span a block (full width) */
+  width: 28px;                 /* Width of each line */
+  height: 4px;                 /* Height of each line */
+  background: #003366;         /* Dark blue color for the lines */
+  margin: 5px 0;               /* Space between lines */
+  border-radius: 2px;          /* Rounded edges for the lines */
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 700px) {
+  /* On mobile, make the header part of the normal flow and center logo + hamburger */
+  .site-header,
+  .nav-header-row {
+    position: static !important;
+    width: 100%;
+    z-index: auto;
+    padding: 0;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center logo and hamburger */
+  }
+
+  /* Center the logo in the header */
+  .site-header .logo {
+    margin: 0 auto; /* Center logo horizontally */
+    display: block;
+  }
+
+  /* Place hamburger right next to logo, with a little space */
+  .hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    margin-left: 16px;
+    margin-right: 0;
+    align-self: center;
+  }
+
+  /* Remove desktop nav positioning and layout on mobile */
+  .nav-main,
+  .nav-tabs {
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    left: 0 !important;
+    top: 0 !important;
+    background: #fff7e1 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    z-index: auto !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0 !important;
+    display: none !important;
+    height: auto !important;
+  }
+
+  /* Show nav-main and nav-tabs vertically when open */
+  .nav-main.open {
+    display: flex !important;
+    margin-bottom: 0 !important; /* Remove space between nav-main and nav-tabs */
+  }
+  .nav-tabs.open {
+    display: flex !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Make sure .nav-right is visible and stacked on mobile when open */
+  .nav-right {
+    display: flex !important;         /* Show right nav links */
+    flex-direction: column !important;/* Stack vertically */
+    align-items: center !important;
+    position: static !important;      /* Remove absolute positioning */
+    width: 100% !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    background: #fff7e1 !important;
+    height: auto !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Make sure all nav links fill the width and stack */
+  .nav-link,
+  .nav-link.give-tab {
+    width: 100%;
+    margin: 6px 0;
+    padding: 14px 0;
+    font-size: 15px;
+    border: none;
+    border-radius: 0;
+    background: none;
+    color: #000;
+    text-align: center;
+    box-shadow: none;
+  }
 }
