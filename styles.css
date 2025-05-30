@@ -251,7 +251,6 @@ body {
   padding-bottom: 0;
 }
 
-/* Add a scaling hover effect to the GIVE nav tab */
 .nav-link.give-tab:hover {
   transform: scale(1.06);       /* Slightly enlarge the GIVE tab */
 }
